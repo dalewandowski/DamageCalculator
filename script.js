@@ -1,14 +1,27 @@
-const inptutDamaged = document.querySelectorAll(".damaged");
+import { tables } from "./tables.js";
+const inputDamaged = document.querySelectorAll(".damaged");
 const inputUndamaged = document.querySelectorAll(".undamaged");
 const sumDamaged = document.querySelector(".sum-damaged");
 const sumUndamaged = document.querySelector(".sum-undamaged");
 const percentageDamaged = document.querySelector(".percent-damaged");
 const percentageUndamaged = document.querySelector(".percent-undamaged");
+const header = document.querySelector(".grain-type-header");
+const selectGrain = document.querySelector(".grain-type");
+
+selectGrain.addEventListener("change", () => {
+  const grain = selectGrain.value;
+  header.textContent = grain;
+  if (tables[grain]) {
+    document.querySelector(".table-container").innerHTML = tables[grain].html;
+  } else {
+    document.querySelector(".table-container").innerHTML = "Do Widzenia";
+  }
+});
 
 function calculateSum() {
   let sum = 0;
-  for (let i = 0; i < inptutDamaged.length; i++) {
-    sum += Number(inptutDamaged[i].value);
+  for (let i = 0; i < inputDamaged.length; i++) {
+    sum += Number(inputDamaged[i].value);
   }
   sumDamaged.textContent = sum;
   sum = 0;
@@ -39,18 +52,20 @@ function calculatePercentage() {
     "%";
 }
 
-function calculate() {
+function init() {
   calculateSum();
   calculatePercentage();
 }
-
-inputUndamaged.forEach((input) => {
-  input.addEventListener("input", calculate);
-});
-
-inptutDamaged.forEach((input) => {
-  input.addEventListener("input", calculate);
-});
+document
+  .querySelector(".table-container")
+  .addEventListener("input", (event) => {
+    if (
+      event.target.classList.contains("damaged") ||
+      event.target.classList.contains("undamaged")
+    ) {
+      init();
+    }
+  });
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

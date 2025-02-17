@@ -1,6 +1,7 @@
-const tables = {
-  name: "Pszenica",
-  html: ` <table>
+export const tables = {
+  Pszenica: {
+    name: "Pszenica",
+    html: ` <table>
       <thead>
         <th></th>
         <th>Pomiar 1</th>
@@ -119,9 +120,11 @@ const tables = {
       </tfoot>
     </table>'
     `,
+  },
 
-  name: "kukurydza",
-  html: ` <table>
+  Kukurydza: {
+    name: "kukurydza",
+    html: ` <table>
       <thead>
         <th></th>
         <th>Pomiar 1</th>
@@ -240,4 +243,9 @@ const tables = {
       </tfoot>
     </table>'
     `,
+  },
+  rzepak: {
+    name: "rzepak",
+    html: "Dzień Dobry",
+  },
 };
