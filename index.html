@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <h1 class="grain-type">Pszenica</h1>
+
+    <label for="select"
+      >Wybierz typ zboża:
+      <select name="grains" class="grain-type" id="select">
+        <option value="pszenica">Pszenica</option>
+        <option value="kukurydza">Kukurydza</option>
+        <option value="rzepak">Rzepak</option>
+        <option value="jęczmień">Jęczmień</option>
+        <option value="przenżyto">Przenżyto</option>
+      </select>
+    </label>
+
+    <table>
+      <thead>
+        <th></th>
+        <th>Pomiar 1</th>
+        <th>Pomiar 2</th>
+        <th>Pomiar 3</th>
+        <th>Pomiar 4</th>
+        <th>Pomiar 5</th>
+        <th>Pomiar 6</th>
+        <th>Suma Pomiarów</th>
+        <th>Udział Procentowy (%)</th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th>Uszkodzone</th>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="damaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td class="sum-damaged"></td>
+          <td class="percent-damaged"></td>
+        </tr>
+        <tr>
+          <th>Nieuszkodzone</th>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td>
+            <input
+              class="undamaged"
+              type="number"
+              placeholder="Podaj wartość..."
+            />
+          </td>
+          <td class="sum-undamaged"></td>
+          <td class="percent-undamaged"></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="7" style="text-align: end" class="sum-col">Suma :</th>
+
+          <td class="damaged-undamaged-sum"></td>
+          <td class="percent-sum"></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div contenteditable="true" style="border: 1px solid #000; padding: 10px">
+      Napisz coś tutaj...
+    </div>
+  </body>
+
+  <script type="module" src="script.js"></script>
+</html>

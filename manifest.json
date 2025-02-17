@@ -1,0 +1,21 @@
+{
+  "name": "Zarządzanie Zbożami",
+  "short_name": "Zboża",
+  "description": "Aplikacja do obliczania sum i procentów dla zboża.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#626569",
+  "theme_color": "#626569",
+  "icons": [
+    {
+      "src": "./android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
