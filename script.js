@@ -1,60 +1,64 @@
 import { tables } from "./tables.js";
-const inputDamaged = document.querySelectorAll(".damaged");
-const inputUndamaged = document.querySelectorAll(".undamaged");
-const sumDamaged = document.querySelector(".sum-damaged");
-const sumUndamaged = document.querySelector(".sum-undamaged");
-const percentageDamaged = document.querySelector(".percent-damaged");
-const percentageUndamaged = document.querySelector(".percent-undamaged");
-const header = document.querySelector(".grain-type-header");
-const selectGrain = document.querySelector(".grain-type");
 
+const selectGrain = document.querySelector(".grain-type");
+const header = document.querySelector(".grain-type-header");
+
+// generowanie tablicy wg wybranego zboża
 selectGrain.addEventListener("change", () => {
   const grain = selectGrain.value;
-  header.textContent = grain;
+  header.innerHTML = grain;
+
   if (tables[grain]) {
     document.querySelector(".table-container").innerHTML = tables[grain].html;
   } else {
-    document.querySelector(".table-container").innerHTML = "Do Widzenia";
+    document.querySelector(".table-container").innerHTML =
+      "<p class='text-center text-danger fw-bold'>Brak danych dla wybranego zboża.</p>";
   }
 });
 
+// liczenie sumy wszystkich inputów
 function calculateSum() {
-  let sum = 0;
-  for (let i = 0; i < inputDamaged.length; i++) {
-    sum += Number(inputDamaged[i].value);
-  }
-  sumDamaged.textContent = sum;
-  sum = 0;
-  for (let i = 0; i < inputUndamaged.length; i++) {
-    sum += Number(inputUndamaged[i].value);
-  }
-  sumUndamaged.textContent = sum;
+  // inputy z tablicy uszkodzone
+  const damaged = document.querySelectorAll(".damaged");
+  // inputy z tablicy nieuszkodzone
+  const undamaged = document.querySelectorAll(".undamaged");
 
-  const sumDamagedUndamaged = document.querySelector(".damaged-undamaged-sum");
+  let damagedSum = 0;
+  let undamagedSum = 0;
 
-  sumDamagedUndamaged.innerHTML =
-    Number(sumDamaged.textContent) + Number(sumUndamaged.textContent);
+  damaged.forEach((input) => {
+    damagedSum += Number(input.value);
+  });
+
+  undamaged.forEach((input) => {
+    undamagedSum += Number(input.value);
+  });
+
+  document.querySelector(".sum-damaged").innerHTML = damagedSum;
+  document.querySelector(".sum-undamaged").innerHTML = undamagedSum;
+
+  document.querySelector(".damaged-undamaged-sum").innerHTML =
+    parseInt(damagedSum) + parseInt(undamagedSum);
+
+  return { damagedSum, undamagedSum };
 }
 
-function calculatePercentage() {
-  const totalDamaged = Number(sumDamaged.textContent);
-  const totalUndamaged = Number(sumUndamaged.textContent);
-  const total = totalDamaged + totalUndamaged;
-  const percentageD = (totalDamaged / total) * 100;
+function calculatePercentage(damagedSum, undamagedSum) {
+  const total = parseFloat(damagedSum) + parseFloat(undamagedSum);
+  const percentageDamaged = document.querySelector(".percent-damaged");
+  const percentageUndamaged = document.querySelector(".percent-undamaged");
+  const percentageD = (damagedSum / total) * 100;
 
   percentageDamaged.innerHTML = percentageD.toFixed(0) + "%";
   percentageUndamaged.innerHTML = (100 - percentageD).toFixed(0) + "%";
 
-  const prcSum = document.querySelector(".percent-sum");
-  prcSum.innerHTML =
-    parseInt(percentageDamaged.innerHTML) +
-    parseInt(percentageUndamaged.innerHTML) +
-    "%";
+  document.querySelector(".percent-sum").innerHTML =
+    (percentageD + (100 - percentageD)).toFixed(0) + "%";
 }
 
 function init() {
-  calculateSum();
-  calculatePercentage();
+  const { damagedSum, undamagedSum } = calculateSum();
+  calculatePercentage(damagedSum, undamagedSum);
 }
 document
   .querySelector(".table-container")
